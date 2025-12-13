@@ -1,0 +1,16 @@
+# Git管理から除外するべきファイル群
+# Visual Studio関連のファイル
+.vs/
+*.sln.ide/
+*.suo
+*.user
+
+# ビルド時に生成されるファイル
+*.obj
+*.exe
+*.ilk
+*.pdb
+*.tmp
+x64/
+Debug/
+Release/
