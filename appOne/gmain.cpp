@@ -9,15 +9,14 @@
 
 void gmain()
 {
-    const float wnd_w = 800;
+    const float wnd_w = 600;
     const float wnd_h = 600;
     window(wnd_w, wnd_h);
     clear(200);
-    strokeWeight(10);
-    stroke(GREEN);
-    // ˆÊ’u‚ğ•Ï”‚Å’u‚¢‚Ä‚í‚©‚è‚â‚·‚­‚·‚é
-    float sx = 100, sy = 400, ex = 700, ey = 400;
-    line(sx, sy, ex, ey);
-    line(wnd_w / 2, 100, wnd_w / 2, 500);
+    strokeWeight(20);
+    stroke(GREEN);  // Frame color
+    fill(RED);      // Inner color
+    float px = 300, py = 300, radius = 200;
+    circle(px, py, radius * 2);
     pause();
 }
