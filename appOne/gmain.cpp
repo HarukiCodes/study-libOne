@@ -11,11 +11,14 @@ void gmain()
 {
     const float wnd_w = 800;
     const float wnd_h = 600;
-
     window(wnd_w, wnd_h);
-
-    // window‚ğì¬‚µ‚Ä‚©‚çclear()‚ğŒÄ‚Ô
-    clear(YELLOW);
-
+    clear(200);
+    strokeWeight(30);  // •Mˆ³
+    stroke(RED);       // F
+    point(400, wnd_h / 2);
+    stroke(YELLOW);
+    point(560, wnd_h / 2);
+    stroke(BLUE);
+    point(720, wnd_h / 2);
     pause();
 }
