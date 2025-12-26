@@ -13,12 +13,11 @@ void gmain()
     const float wnd_h = 600;
     window(wnd_w, wnd_h);
     clear(200);
-    strokeWeight(30);  // •Mˆ³
-    stroke(RED);       // F
-    point(400, wnd_h / 2);
-    stroke(YELLOW);
-    point(560, wnd_h / 2);
-    stroke(BLUE);
-    point(720, wnd_h / 2);
+    strokeWeight(10);
+    stroke(GREEN);
+    // ˆÊ’u‚ğ•Ï”‚Å’u‚¢‚Ä‚í‚©‚è‚â‚·‚­‚·‚é
+    float sx = 100, sy = 400, ex = 700, ey = 400;
+    line(sx, sy, ex, ey);
+    line(wnd_w / 2, 100, wnd_w / 2, 500);
     pause();
 }
