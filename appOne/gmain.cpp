@@ -13,10 +13,20 @@ void gmain()
     const float wnd_h = 600;
     window(wnd_w, wnd_h);
     clear(200);
+
     strokeWeight(20);
-    stroke(GREEN);  // Frame color
-    fill(RED);      // Inner color
-    float px = 300, py = 300, radius = 200;
-    circle(px, py, radius * 2);
+    stroke(128);
+    fill(YELLOW);
+
+    // 左上の位置を指定するMode
+    // rectMode(RECT_MODE::CORNER);
+    // rectの中心の位置を指定するMode
+    rectMode(RECT_MODE::CENTER);
+
+    // 角度形式を指定
+    angleMode(ANGLE_MODE::DEGREES);
+    float px = 300, py = 300, w = 200, h = 300, angle = 45;
+    rect(px, py, w, h, angle);
+
     pause();
 }
