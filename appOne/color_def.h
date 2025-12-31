@@ -1,9 +1,12 @@
 #pragma once
-#define RED 255, 0, 0
-#define GREEN 0, 255, 0
-#define BLUE 0, 0, 255
-#define CYAN 0, 255, 255
-#define MAGENTA 255, 0, 255
-#define YELLOW 255, 255, 0
-#define WHITE 255, 255, 255
-#define BGCOLOR 74, 84, 89
+#include "libOne.h"
+
+inline const COLOR RED(255, 0, 0);
+inline const COLOR GREEN(0, 255, 0);
+inline const COLOR BLUE(0, 0, 255);
+inline const COLOR CYAN(0, 255, 255);
+inline const COLOR MAGENTA(255, 0, 255);
+inline const COLOR YELLOW(255, 255, 0);
+inline const COLOR WHITE(255, 255, 255);
+inline const COLOR BLACK(0,0,0);
+inline const COLOR BGCOLOR(74, 84, 89);
