@@ -19,4 +19,7 @@
   <ItemGroup>
     <ClCompile Include="gmain.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="color_def.h" />
+  </ItemGroup>
 </Project>

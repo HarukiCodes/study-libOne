@@ -6,4 +6,4 @@
 #define MAGENTA 255, 0, 255
 #define YELLOW 255, 255, 0
 #define WHITE 255, 255, 255
-#define GRAY 60
+#define BGCOLOR 74, 84, 89

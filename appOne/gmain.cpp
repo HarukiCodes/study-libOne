@@ -1,56 +1,57 @@
 #include "color_def.h"
 #include "libOne.h"
 
-#define BGCOLOR 74, 84, 89
-
 void gmain()
 {
     const float wnd_w = 1280, wnd_h = 720;
     window(wnd_w, wnd_h, full);
 
     // Data
-    int life = 5;
-    float px = 500;
+    COLOR green = {0, 255, 0};
+    COLOR yellow = {255, 255, 0};
+    COLOR red = {255, 0, 0};
+    COLOR color = green;
+    int hp_max = 500;
+    int hp = hp_max;
+    int hp_warning = hp_max * 0.3f;
+    int hp_danger = hp_max * 0.1f;
+    float px = 400;
     float py = 140;
-    float radius = 50;
-    float space = 100;
-    float sw = 20;
+    float h = 60;  // height
+    float ts = 100;
+
     while (notQuit)
     {
-        // Update data
-        if (isTrigger(KEY_A))
+        if (isTrigger(KEY_SPACE))
         {
-            life--;
+            hp = hp_max;
         }
-        if (isTrigger(KEY_D))
+        if (hp > 0)
         {
-            life++;
+            hp -= 2;
         }
-        // Drawing
+        if (hp > hp_warning)
+        {
+            color = green;
+        }
+        else if (hp > hp_danger)
+        {
+            color = yellow;
+        }
+        else
+        {
+            color = red;
+        }
         clear(BGCOLOR);
-        fill(YELLOW);
-        print((let) "life=" + life);
-        strokeWeight(sw);
-        stroke(WHITE);
-
-        // while-version
-        int i = 0;
-        fill(255, 200, 200);
-        while (i < life)
+        fill(128);
+        rect(px, py, hp_max, h);
+        fill(color);
+        rect(px, py, hp, h);
+        if (hp <= 0)
         {
-            // offset: Šî€‚©‚ç‚Ì‚¸‚ê
-            float offset_x = space * i;
-            circle(px + offset_x, py, radius * 2);
-            i++;
-        }
-
-        // for-version
-        fill(160, 200, 240);
-        for (int i = 0; i < life; i++)
-        {
-            float offset_x = space * i;
-            float offset_y = space * 2;
-            circle(px + offset_x, py + offset_y, radius * 2);
+            textSize(ts);
+            fill(RED);
+            text("Game Over", px, wnd_h / 2);
         }
     }
 }
