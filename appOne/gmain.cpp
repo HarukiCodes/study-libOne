@@ -1,32 +1,37 @@
+#include "color_def.h"
 #include "libOne.h"
-
-#define RED 255, 0, 0
-#define GREEN 0, 255, 0
-#define BLUE 0, 0, 255
-#define CYAN 0, 255, 255
-#define MAGENTA 255, 0, 255
-#define YELLOW 255, 255, 0
 
 void gmain()
 {
-    const float wnd_w = 600;
-    const float wnd_h = 600;
-    window(wnd_w, wnd_h);
-    clear(200);
+    const float wnd_w = 1280, wnd_h = 720;
+    window(wnd_w, wnd_h, full);
+    float px = wnd_w / 2;
+    float py = wnd_h / 2;
+    float vx = 5;
+    float radius = 100;
+    float rect_len = radius * Sqrt(2);
+    float sw = radius / 8;  // strokeWeight
+    float angle = 0;
+    float angle_speed = 0.03f;
 
-    strokeWeight(20);
-    stroke(128);
-    fill(YELLOW);
+    rectMode(CENTER);
+    stroke(RED);
 
-    // 左上の位置を指定するMode
-    // rectMode(RECT_MODE::CORNER);
-    // rectの中心の位置を指定するMode
-    rectMode(RECT_MODE::CENTER);
-
-    // 角度形式を指定
-    angleMode(ANGLE_MODE::DEGREES);
-    float px = 300, py = 300, w = 200, h = 300, angle = 45;
-    rect(px, py, w, h, angle);
-
-    pause();
+    while (notQuit)
+    {
+        px += vx;
+        angle += angle_speed;
+        if (px < 0 || px > wnd_w)
+        {
+            vx = -vx;
+            angle_speed = -angle_speed;
+        }
+        clear(GRAY);
+        strokeWeight(sw);
+        circle(px, py, radius * 2);
+        rect(px, py, rect_len, rect_len, angle);
+        line(wnd_w / 2, 0, px, py);
+        strokeWeight(sw * 3);
+        point(px, py);
+    }
 }
