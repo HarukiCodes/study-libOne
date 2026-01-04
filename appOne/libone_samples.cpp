@@ -1,7 +1,8 @@
-#include "libOne.h"
 #include "libone_samples.h"
-#include "face.h"
+
 #include "color_defines.h"
+#include "face.h"
+#include "libOne.h"
 
 namespace libone_samples
 {
@@ -207,10 +208,10 @@ namespace libone_samples
         COLOR yellow = {255, 255, 0};
         COLOR red = {255, 0, 0};
         COLOR color = green;
-        int hp_max = 500;
-        int hp = hp_max;
-        int hp_warning = hp_max * 0.3f;
-        int hp_danger = hp_max * 0.1f;
+        float hp_max = 500;
+        float hp = hp_max;
+        int hp_warning = static_cast<int>(hp_max * 0.3f);
+        int hp_danger = static_cast<int>(hp_max * 0.1f);
         float px = 400;
         float py = 140;
         float h = 60;  // height
@@ -287,4 +288,137 @@ namespace libone_samples
             }
         }
     }
-}  // namespace libone_sample
+
+    void _13_FireBullets()
+    {
+        const float wnd_w = 1920, wnd_h = 1080;
+        window(wnd_w, wnd_h, full);
+        struct Player
+        {
+            float px, py, w, h, vx, offset_y;
+        };
+        struct Bullet
+        {
+            float px, py, w, h, vy;
+            int hp;
+        };
+        Player p;
+        p.px = width / 2;
+        p.py = height - 150;
+        p.w = 100;
+        p.h = 200;
+        p.vx = 10;
+        p.offset_y = -100;
+        const int num_bullets = 10;
+        Bullet b[num_bullets];
+        for (int i = 0; i < num_bullets; i++)
+        {
+            b[i].px = p.px;
+            b[i].py = p.py;
+            b[i].w = 20;
+            b[i].h = 40;
+            b[i].vy = -10;
+            b[i].hp = 0;
+        }
+
+        while (notQuit)
+        {
+            if (isPress(KEY_A))
+            {
+                p.px += -p.vx;
+            }
+            if (isPress(KEY_D))
+            {
+                p.px += p.vx;
+            }
+            if (isTrigger(KEY_SPACE))
+            {
+                for (int i = 0; i < num_bullets; i++)
+                {
+                    if (b[i].hp == 0)
+                    {
+                        b[i].hp = 1;
+                        b[i].px = p.px;
+                        b[i].py = p.py + p.offset_y;
+                        break;
+                    }
+                }
+            }
+            for (int i = 0; i < num_bullets; i++)
+            {
+                if (b[i].hp > 0)
+                {
+                    b[i].py += b[i].vy;
+                    // Out of window
+                    if (b[i].py < -b[i].h)
+                    {
+                        b[i].hp = 0;
+                    }
+                }
+            }
+            clear();
+            rectMode(CENTER);
+            rect(p.px, p.py, p.w, p.h);
+            for (int i = 0; i < num_bullets; i++)
+            {
+                if (b[i].hp > 0)
+                {
+                    rect(b[i].px, b[i].py, b[i].w, b[i].h);
+                }
+            }
+        }
+    }
+
+    void _14_SelectionSort()
+    {
+        const int num_data = 20;
+        float ps = 30;  // print size
+        const float wnd_w = 1100, wnd_h = ps * num_data;
+        window(wnd_w, wnd_h);
+
+        int score[num_data];
+        const int max_value = 1000;
+        int ref, cmp;  // refrence,comparison
+        auto setRandom = [&]()
+        {
+            for (int i = 0; i < num_data; i++)
+            {
+                score[i] = random() % (max_value + 1);
+            }
+        };
+        setRandom();
+
+        printSize(ps);
+        while (notQuit)
+        {
+            clear(BGCOLOR);
+            if (isTrigger(KEY_A))
+            {
+                setRandom();
+            }
+            // Selection sort
+            if (isTrigger(KEY_D))
+            {
+                for (ref = 0; ref < num_data - 1; ref++)
+                {
+                    for (cmp = ref + 1; cmp < num_data; cmp++)
+                    {
+                        if (score[ref] < score[cmp])
+                        {
+                            // Swap
+                            int w = score[ref];
+                            score[ref] = score[cmp];
+                            score[cmp] = w;
+                        }
+                    }
+                }
+            }
+            // Drawing
+            for (int i = 0; i < num_data; i++)
+            {
+                print(score[i]);
+                rect(100, ps * i, score[i], ps);
+            }
+        }
+    }
+}  // namespace libone_samples
