@@ -1,37 +1,80 @@
 #include "libOne.h"
-#include "face.h"
 
 void gmain()
 {
     const float wnd_w = 1920, wnd_h = 1080;
     window(wnd_w, wnd_h, full);
-    float px = width / 2;
-    float py = height / 2;
-    float angle = 0;
-    float offset_x = 60;
-    float offset_y = 60;
-    float sw = 10;
-    int faceType = 1;
-    strokeWeight(sw);
+    struct Player
+    {
+        float px, py, w, h, vx, offset_y;
+    };
+    struct Bullet
+    {
+        float px, py, w, h, vy;
+        int hp;
+    };
+    Player p;
+    p.px = width / 2;
+    p.py = height - 150;
+    p.w = 100;
+    p.h = 200;
+    p.vx = 10;
+    p.offset_y = -100;
+    const int num_bullets = 10;
+    Bullet b[num_bullets];
+    for (int i = 0; i < num_bullets; i++)
+    {
+        b[i].px = p.px;
+        b[i].py = p.py;
+        b[i].w = 20;
+        b[i].h = 40;
+        b[i].vy = -10;
+        b[i].hp = 0;
+    }
+
     while (notQuit)
     {
-        offset_x = width / 2 - mouseX;
-        offset_y = height / 2 - mouseY;
+        if (isPress(KEY_A))
+        {
+            p.px += -p.vx;
+        }
+        if (isPress(KEY_D))
+        {
+            p.px += p.vx;
+        }
         if (isTrigger(KEY_SPACE))
         {
-            faceType = 1 - faceType;
-        }
-        angle += 0.01f;
-        clear(60, 120, 240);
-        for (int i = -5; i <= 5; i++)
-        {
-            if (faceType == 1)
+            for (int i = 0; i < num_bullets; i++)
             {
-                roundFace(px + offset_x * i, py + offset_y * i);
+                if (b[i].hp == 0)
+                {
+                    b[i].hp = 1;
+                    b[i].px = p.px;
+                    b[i].py = p.py + p.offset_y;
+                    break;
+                }
             }
-            else
+        }
+        for (int i = 0; i < num_bullets; i++)
+        {
+            if (b[i].hp > 0)
             {
-                squareFace(px + offset_x * i, py + offset_y * i, angle);
+                b[i].py += b[i].vy;
+                // Out of window
+                if (b[i].py < -b[i].h)
+                {
+                    b[i].hp = 0;
+                }
+            }
+        }
+        clear();
+        rectMode(CENTER);
+        rect(p.px, p.py, p.w, p.h);
+        for (int i = 0; i < num_bullets; i++)
+        {
+            if (b[i].hp > 0)
+            {
+                rect(b[i].px, b[i].py, b[i].w, b[i].h);
             }
         }
     }
