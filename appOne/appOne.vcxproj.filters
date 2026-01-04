@@ -18,5 +18,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="gmain.cpp" />
+    <ClCompile Include="face.cpp" />
+    <ClCompile Include="libone_samples.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="color_defines.h" />
+    <ClInclude Include="face.h" />
+    <ClInclude Include="libone_samples.h" />
   </ItemGroup>
 </Project>

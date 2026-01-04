@@ -1,8 +1,3 @@
-#include "libOne.h"
+#include "libone_samples.h"
 
-void gmain()
-{
-    window(800, 600);
-
-    pause();
-}
+void gmain() { libone_samples::_15_CircleArt(); }
