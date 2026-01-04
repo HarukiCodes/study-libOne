@@ -14,4 +14,5 @@ namespace libone_samples
     void _10to12_DrawSquareOrRoundFaces();
     void _13_FireBullets();
     void _14_SelectionSort();
+    void _15_CircleArt();
 }  // namespace libone_samples

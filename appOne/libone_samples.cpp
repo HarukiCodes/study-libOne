@@ -421,4 +421,27 @@ namespace libone_samples
             }
         }
     }
+
+    void _15_CircleArt()
+    {
+        window(700, 700);
+        clear(0);
+        float v = 0;
+        fill(0, 0, 0, 0);  // alpha=0
+        while (notQuit)
+        {
+            v += 10;
+            stroke(255, 0, 0, 128);  // RED
+            circle(v, v, v);
+
+            stroke(255, 255, 0, 128);  // YELLOW
+            circle(width - v, v, v);
+
+            stroke(0, 255, 0, 128);  // BLUE
+            circle(width - v, height - v, v);
+
+            stroke(0, 0, 255, 128);  // GREEN
+            circle(v, height - v, v);
+        }
+    }
 }  // namespace libone_samples
